@@ -149,7 +149,7 @@ r_dir_file(domain, sysfs)
 r_dir_file(domain, sysfs_devices_system_cpu)
 r_dir_file(domain, inotify)
 r_dir_file(domain, cgroup)
-r_dir_file(domain, proc_net)
+allow domain proc_net:dir search;
 allow domain proc_cpuinfo:file r_file_perms;
 
 # debugfs access
@@ -401,7 +401,15 @@ neverallow domain { file_type fs_type dev_type }:{ lnk_file fifo_file sock_file 
 # Nobody should be able to execute su on user builds.
 # On userdebug/eng builds, only dumpstate, shell, and
 # su itself execute su.
-neverallow { domain userdebug_or_eng(`-dumpstate -shell -su -init -untrusted_app -sudaemon') } su_exec:file no_x_file_perms;
+neverallow { 
+  domain userdebug_or_eng(`-dumpstate 
+                           -shell 
+                           -su 
+                           -init 
+                           -untrusted_app 
+                           -netmonitor 
+                           -sudaemon') 
+} su_exec:file no_x_file_perms;
 
 # Do not allow the introduction of new execmod rules. Text relocations
 # and modification of executable pages are unsafe.

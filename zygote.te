@@ -55,6 +55,9 @@ security_access_policy(zygote)
 # /proc/cpuinfo with /system/lib/<ISA>/cpuinfo using a bind mount
 allow zygote proc_cpuinfo:file mounton;
 
+# Read access to pseudo filesystems.
+r_dir_file(zygote, proc_net)
+
 # Allow remounting rootfs as MS_SLAVE
 allow zygote rootfs:dir mounton;
 allow zygote sdcard_type:dir { write search setattr create add_name mounton }; # TODO: deprecated in M

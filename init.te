@@ -172,6 +172,9 @@ userdebug_or_eng(`
   domain_auto_trans(init, logcat_exec, logd)
 ')
 
+# Read access to /proc/net
+r_dir_file(init, proc_net)
+
 # Support "adb shell stop"
 allow init self:capability kill;
 allow init domain:process sigkill;

@@ -153,6 +153,9 @@ allow vold metadata_block_device:blk_file rw_file_perms;
 allow vold unencrypted_data_file:{ file } create_file_perms;
 allow vold unencrypted_data_file:dir create_dir_perms;
 
+# Read access to pseudo filesystems.
+r_dir_file(vold, proc_net)
+
 # Write to /proc/sys/vm/drop_caches
 allow vold proc_drop_caches:file w_file_perms;
 

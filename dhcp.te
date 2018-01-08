@@ -12,6 +12,7 @@ allow dhcp self:netlink_route_socket nlmsg_write;
 allow dhcp shell_exec:file rx_file_perms;
 allow dhcp system_file:file rx_file_perms;
 # For /proc/sys/net/ipv4/conf/*/promote_secondaries
+r_dir_file(dhcp, proc_net)
 allow dhcp proc_net:file write;
 
 set_prop(dhcp, dhcp_prop)

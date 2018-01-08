@@ -67,6 +67,7 @@ allow shell { service_manager_type -gatekeeper_service }:service_manager find;
 # allow shell to look through /proc/ for ps, top
 allow shell domain:dir { search open read getattr };
 allow shell domain:{ file lnk_file } { open read getattr };
+r_dir_file(shell, proc_net)
 
 # allow shell to read /proc/pid/attr/current for ps -Z
 allow shell domain:process getattr;

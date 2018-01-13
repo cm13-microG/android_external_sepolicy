@@ -33,3 +33,6 @@ allow radio radio_service:service_manager { add find };
 allow radio surfaceflinger_service:service_manager find;
 allow radio app_api_service:service_manager find;
 allow radio system_api_service:service_manager find;
+
+# Read access to /proc/net
+r_dir_file(radio, proc_net)
